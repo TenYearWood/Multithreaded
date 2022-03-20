@@ -1,3 +1,5 @@
+import sun.misc.Unsafe;
+
 /**
  * 0 new #2 <java/lang/Object>
  * 3 dup
@@ -8,5 +10,8 @@
 public class JustTest {
     public static void main(String[] args) {
         Object o = new Object();
+
+        Unsafe unsafe = Unsafe.getUnsafe();
+
     }
 }
