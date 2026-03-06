@@ -8,7 +8,7 @@ import java.util.concurrent.Semaphore;
  * 灯亮的时候可以执行，不亮不可以执行，大概这么个概念
  * 最多允许多少个线程同时运行
  * fair: 是否公平，默认非公平
- *
+ * <p>
  * 比喻场景：
  * 机动车道很多，8条机动车道，前面有1个收费站，更多的车同时往收费站冲，不好意思，谁
  * acquire得到这个收费站通道，谁过去。限流。如果fair为true时，车道上后面来新车的时候，
@@ -19,9 +19,10 @@ public class T11_TestSemaphore {
 //        Semaphore s = new Semaphore(1);
         Semaphore s = new Semaphore(1, true);
         //允许一个线程同时执行
+        //如果permits写2，就允许两个线程同时执行
 
         new Thread(() -> {
-            try{
+            try {
                 /**
                  * s.acquire 阻塞方法
                  * acquire一下permits就会减1变为0，别人是acquire不到的
@@ -31,10 +32,10 @@ public class T11_TestSemaphore {
                  *
                  */
                 s.acquire();
-                System.out.println("T1 running...");
-                Thread.sleep(200);
-                System.out.println("T1 running...");
-            }catch (InterruptedException e){
+                System.out.println("T1 running begin...");
+                Thread.sleep(2000);
+                System.out.println("T1 running end...");
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
                 s.release();
@@ -42,12 +43,12 @@ public class T11_TestSemaphore {
         }).start();
 
         new Thread(() -> {
-            try{
+            try {
                 s.acquire();
-                System.out.println("T2 running...");
-                Thread.sleep(200);
-                System.out.println("T2 running...");
-            }catch (InterruptedException e){
+                System.out.println("T2 running begin...");
+                Thread.sleep(2000);
+                System.out.println("T2 running end...");
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
                 s.release();
