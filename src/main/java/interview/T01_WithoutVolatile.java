@@ -10,6 +10,11 @@ import java.util.concurrent.TimeUnit;
  * 写两个线程，线程1添加10个元素到容器中，线程2实现监控元素的个数，当个数到5个时，线程2给出提示并结束
  *
  * 分析下面程序，能完成这个功能吗？
+ *
+ * 因为ArrayList是线程不安全的，t2中判断c.size == 5，有可能list中已经加到5个了，size正准备++还没加完呢，你获取到size了 != 5，没有结束，而其实已经到
+ * 5个了，所以这个判断 c.size == 5 本身就有问题，不准确。
+ * 所以必须要使用同步容器。arrayList是线程不安全的，要换
+ *
  */
 public class T01_WithoutVolatile {
 

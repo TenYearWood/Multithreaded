@@ -71,7 +71,7 @@ public class T03_WaitNotify {
 
                     if(c.size() == 5) {
                         lock.notify();
-                        //释放锁，让t2得以执行
+                        //释放锁，让t2得以执行 (notify方法不会释放锁，所以需要调下wait方法来释放锁，让t2得以执行)
                         try {
                             lock.wait();
                         } catch (InterruptedException e) {
