@@ -50,7 +50,7 @@ public class T03_WaitNotify {
                     }
                 }
                 System.out.println("t2 结束");
-                //通知t1继续执行
+                //通知t1继续执行，这句代码必须写，不写的话t1线程就wait死在那了，add 4之后就停在那了。
                 lock.notify();
             }
 
